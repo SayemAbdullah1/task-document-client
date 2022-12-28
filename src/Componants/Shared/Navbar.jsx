@@ -45,8 +45,8 @@ const Navbar = () => {
                 <nav>
                     <ul className='p-4 flex flex-col text-gray-800'>
                         <Link to='/addtask'><button><li className='flex py-4 text-xl'><MdAddTask size={25} className='mr-4' />Add task</li></button></Link>
-                        <li className='flex py-4 text-xl'><GrTask size={25} className='mr-4' />My task</li>
-                        <li className='flex py-4 text-xl'><MdOutlineTask size={25} className='mr-4' />Complete task</li>
+                        <Link to='/mytask'><li className='flex py-4 text-xl'><GrTask size={25} className='mr-4' />My task</li></Link>
+                        <Link to='complete'><li className='flex py-4 text-xl'><MdOutlineTask size={25} className='mr-4' />Complete task</li></Link>
 
                     </ul>
                 </nav>
