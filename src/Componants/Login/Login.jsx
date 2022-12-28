@@ -1,34 +1,34 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../Provider/AuthProvider';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [loginError, setLoginError] = useState('');
     const [loginUserEmail, setLoginUserEmail] = useState('');
+    const { signIn } = useContext(AuthContext)
 
 
-    const handleLoginForm = data => {
+    const handleLogin = data => {
         console.log(data);
         setLoginError('');
-       
+        signIn(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                setLoginUserEmail(data.email);
+            })
+            .catch(error => {
+                console.log(error.message)
+                setLoginError(error.message);
+            });
     }
-
-    // const handleLoginWithGoogle = () => {
-    //     googleLogin()
-    //         .then(result => {
-    //             const user = result.user;
-    //             console.log(user);
-    //             navigate('/')
-    //         })
-    //         .catch(err => console.error(err));
-    // }
-
     return (
         <div className='h-[700px] flex justify-center items-center'>
             <div className='w-96 p-7'>
                 <h2 className='text-4xl text-center text-secondary font-bold mb-6'>Login</h2>
-                <form onSubmit={handleSubmit(handleLoginForm)}>
+                <form onSubmit={handleSubmit(handleLogin)}>
                     <div className="form-control w-full max-w-xs">
                         <label className="label"> <span className="label-text">Email</span></label>
                         <input type="text"

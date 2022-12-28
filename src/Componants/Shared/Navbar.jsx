@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { AiOutlineAlignLeft, AiOutlineClose, } from 'react-icons/ai';
 import { MdOutlineTask, MdAddTask } from 'react-icons/md';
 import { GrTask } from 'react-icons/gr';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../Provider/AuthProvider';
 
 const Navbar = () => {
     const [nav, setNav] = useState(false)
+    const { user, logOut } = useContext(AuthContext)
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(err => console.log(err));
+    }
     return (
         <div className='max-w-[1640px] mx-auto flex justify-between items-center p-4'>
             {/* left side */}
@@ -13,13 +21,19 @@ const Navbar = () => {
                 <div onClick={() => setNav(!nav)} className='cursor-pointer'>
                     <AiOutlineAlignLeft size={30} />
                 </div>
-                <h1 className='text-2xl sm:text-3xl lg:text-4xl px-2'>Daily <span>Task</span></h1>
+                <Link to='/'><h1 className='text-2xl sm:text-3xl lg:text-4xl px-2'>Daily <span>Task</span></h1></Link>
 
             </div>
 
             <div className='me-2'>
+               {
+                user?.uid ? 
+                <Link onClick={handleLogOut}><button className='bg-gray-300 px-5 py-2 rounded-xl font-bold'>Logout</button></Link>
+                :
                 <Link to='/login'><button className='bg-gray-300 px-5 py-2 rounded-xl font-bold'>Login</button></Link>
-                <Link to='/signup'><button className='bg-gray-300 px-5 py-2 rounded-xl font-bold'>Logout</button></Link>
+                
+               } 
+               
             </div>
             {/* mobile menu */}
             {nav ? <div className='bg-black/80 fixed w-full h-screen z-10 top-0 left-0'>
