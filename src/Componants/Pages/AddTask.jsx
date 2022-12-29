@@ -18,7 +18,7 @@ const AddTask = () => {
             picture,
         }
 
-        fetch('http://localhost:5000/allTask', {
+        fetch('https://task-document-server.vercel.app/allTask', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -36,7 +36,7 @@ const AddTask = () => {
     return (
         <div className='h-[500px] flex justify-center items-center'>
             <div className='w-96 p-7'>
-                <h2 className='text-4xl text-center text-secondary font-bold mb-6'>Add Products</h2>
+                <h2 className='text-4xl text-center text-secondary font-bold mb-6'>Add Task</h2>
                 <form onSubmit={handleAddProduct} className='grid grid-cols-1 gap-3 mt-10'>
 
 

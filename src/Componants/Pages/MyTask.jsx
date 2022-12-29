@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Loading from '../Shared/Loading';
 
 const MyTask = () => {
-    const url = `http://localhost:5000/allTask`;
+    const url = `https://task-document-server.vercel.app/allTask`;
 
     const { data: allTask = [], refetch, isLoading } = useQuery({
         queryKey: ['allTask'],
@@ -17,20 +17,20 @@ const MyTask = () => {
             return data;
         }
     })
-    const handleDeleteProduct = task => {
-        fetch(`http://localhost:5000/deleteTask${task._id}`, {
-            method: 'DELETE'
+    // const handleDeleteProduct = task => {
+    //     fetch(`https://task-document-server.vercel.app/allTask/${task._id}`, {
+    //         method: 'DELETE'
 
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                if (data.deletedCount > 0) {
-                    refetch();
-                    toast.success(`deleted successfully`)
-                }
-            })
-    }
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             console.log(data);
+    //             if (data.deletedCount > 0) {
+    //                 refetch();
+    //                 toast.success(`deleted successfully`)
+    //             }
+    //         })
+    // }
 
     if (isLoading) {
         return <Loading></Loading>
@@ -38,6 +38,7 @@ const MyTask = () => {
     return (
 
         <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+            <h2 className='text-4xl text-center text-secondary font-bold mb-6'>My Task</h2>
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -75,7 +76,7 @@ const MyTask = () => {
                                 <Link to='/complete' class="font-bold text-gary-600 dark:text-blue-500 hover:underline"><button type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Completed</button></Link>
                         </td>
                         <td class="py-4 px-6">
-                                <button onClick={() => handleDeleteProduct(task)} class="font-bold text-red-600 dark:text-blue-500 hover:underline">Delete</button>
+                                <button class="font-bold text-red-600 dark:text-blue-500 hover:underline">Delete</button>
                         </td>
                     </tr>
                     )

@@ -6,6 +6,7 @@ import Home from "../Componants/Pages/Home/Home";
 import MyTask from "../Componants/Pages/MyTask";
 import Register from "../Componants/Register/Register";
 import Main from "../layout/Main";
+import PrivateRoute from "./PrivateRoute";
 
 
 
@@ -23,16 +24,20 @@ const route = createBrowserRouter([
                 element: <Login></Login>
             },
             {
+                path: '/signup',
+                element: <Register></Register>
+            },
+            {
                 path: '/addtask',
-                element: <AddTask></AddTask>
+                element: <PrivateRoute><AddTask></AddTask></PrivateRoute>
             },
             {
                 path: '/mytask',
-                element: <MyTask></MyTask>
+                element: <PrivateRoute><MyTask></MyTask></PrivateRoute>
             },
             {
                 path:'/complete',
-                element: <CompleteTask></CompleteTask>
+                element: <PrivateRoute><CompleteTask></CompleteTask></PrivateRoute>
             }
         ]
     }
